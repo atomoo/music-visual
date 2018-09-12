@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    background-color: #757575;
+}
+#example {
+    text-align: center;
+    width: 1200px;
+    margin: 0 auto
+}
