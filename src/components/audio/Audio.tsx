@@ -40,9 +40,17 @@ export default class AppComponent extends React.Component<{}, AppStateInterface>
         this.draw();
     }
 
+    clearCanvas = () => {
+        this.canvasCtx.clearRect(0, 0, this.visualRef.current.width, this.visualRef.current.height);
+    }
+
     draw = () => {
+        if (this.audioRef.current.ended) {
+            this.clearCanvas();
+            this.barItems = [];
+        }
         if (!this.audioRef.current.paused) {
-            this.canvasCtx.clearRect(0, 0, this.visualRef.current.width, this.visualRef.current.height);
+            this.clearCanvas();
             this.analyser.getByteFrequencyData(this.dataArray);
             for (let index = 0; index < this.countOfBar; index++) {
                 const data = this.dataArray[Math.floor(index * this.scale)]
