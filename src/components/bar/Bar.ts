@@ -1,4 +1,5 @@
 export default class Bar {
+    // x, y 是左下角的坐标
     x: number;
     y: number;
     width: number;
@@ -22,9 +23,9 @@ export default class Bar {
             this.fillColor = fillColor;
         }
         else {
-            this.fillColor = this.canvasCtx.createLinearGradient(0, 255, 0, 0);
+            this.fillColor = this.canvasCtx.createLinearGradient(0, this.y, 0, this.y - 255);
             this.fillColor.addColorStop(0, '#00FF00');
-            this.fillColor.addColorStop(0, '#FF0000');
+            this.fillColor.addColorStop(1, '#FF0000');
         }
     }
 
@@ -32,8 +33,9 @@ export default class Bar {
         this.canvasCtx.moveTo(this.x, this.y);
         this.canvasCtx.beginPath();
         this.canvasCtx.lineTo(this.x + this.width, this.y);
-        this.canvasCtx.lineTo(this.x + this.width, this.y + this.height);
-        this.canvasCtx.lineTo(this.x, this.y + this.height);
+        this.canvasCtx.lineTo(this.x + this.width, this.y - this.height);
+        this.canvasCtx.lineTo(this.x, this.y - this.height);
+        this.canvasCtx.lineTo(this.x, this.y);
         this.canvasCtx.closePath();
         this.canvasCtx.fillStyle = this.fillColor;
         this.canvasCtx.fill();
