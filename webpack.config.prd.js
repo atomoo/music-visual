@@ -31,6 +31,7 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 8192,
+                        name: '[name].[hash:7].[ext]',
                     },
                 },
                 exclude: /node_modules/,
@@ -41,7 +42,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].[hash:7].js',
         path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
