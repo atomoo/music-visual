@@ -2,6 +2,16 @@ import * as React from 'react';
 import Bar from '../bar/Bar';
 import * as audioSource from './rainbow.mp3';
 
+declare global {
+    interface Window {
+        AudioContext: {
+            new(): AudioContext
+        },
+        webkitAudioContext: {
+            new(): AudioContext
+        }
+    }
+}
 interface AppStateInterface {
     audioSupport: boolean
 }
@@ -21,7 +31,7 @@ export default class AppComponent extends React.Component<{}, AppStateInterface>
 
     constructor(props: any) {
         super(props);
-        const AudioContextClass = (window as any).AudioContext || (window as any).webkitAudioContext;
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
         this.audioCtx = new AudioContextClass();
         this.analyser = this.audioCtx.createAnalyser();
         this.state = {
