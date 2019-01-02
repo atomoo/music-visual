@@ -50,6 +50,12 @@ export default class AppComponent extends React.Component<{}, AppStateInterface>
         this.draw();
     }
 
+    init = () => {
+        if (this.audioCtx.state !== 'running') {
+            this.audioCtx.resume();
+        }
+    };
+
     clearCanvas = () => {
         this.canvasCtx.clearRect(0, 0, this.visualRef.current.width, this.visualRef.current.height);
     }
@@ -87,7 +93,7 @@ export default class AppComponent extends React.Component<{}, AppStateInterface>
         ? (
             <React.Fragment>
                 <canvas ref={this.visualRef} width={1200} height={600} />
-                <audio ref={this.audioRef} src={audioSource} controls preload="auto" />
+                <audio ref={this.audioRef} src={audioSource} controls preload="auto" onPlay={this.init} />
                 <a href="https://music.163.com/#/song?id=27646215" target="blank" style={{display: 'block'}}>彩虹山-文雀乐队Sparrow</a>
             </React.Fragment>
         )
